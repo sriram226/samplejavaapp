@@ -44,7 +44,19 @@ pipeline {
                 
             }
         }
-    
+                stage('push docker image') {
+			steps {
+				withCredentials([string(credentialsId: 'DOCKER_HUB_PWD', variable: 'dockerhub')]) {
+                sh "docker login -u sriram226 -p ${dockerhub}"
+				}
+				sh 'docker push sriram226/ci-cd:$BUILD_NUMBER'
+			}
+        }
+        stage('Deploy to K8s') {
+			steps {
+				sh 'kubectl apply -f deploy/sampleapp-deploy-k8s.yml'
+			}
+        }
 	    
 	    
     }
