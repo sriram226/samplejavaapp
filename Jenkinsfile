@@ -40,9 +40,8 @@ pipeline {
 	    
 	     stage('Build image') {
                steps {
-                 script {
-                    myapp = docker.build("sriram226/ci-cd:${env.BUILD_ID}")
-                }
+                 sh 'docker build -t sriram226/ci-cd:$BUILD_NUMBER .'
+                
             }
         }
     
