@@ -46,8 +46,8 @@ pipeline {
         }
                 stage('push docker image') {
 			steps {
-				withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-                sh "docker login -u sriram226 -p ${dockerhub}"
+				withCredentials([string(credentialsId: 'DOCKER_HUB_PWD', variable: 'DOCKER_HUB_PWD')]) {
+                sh "docker login -u sriram226 -p ${DOCKER_HUB_PWD}"
 				}
 				sh 'docker push sriram226/ci-cd:$BUILD_NUMBER'
 			}
