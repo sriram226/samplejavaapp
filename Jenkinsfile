@@ -54,7 +54,9 @@ pipeline {
         }
         stage('Deploy to K8s') {
 			steps {
-				sh 'kubectl apply -f deploy/sampleapp-deploy-k8s.yml'
+				sh 'chmod 755 changetag.sh'
+				sh './changetag.sh $BUILD_NUMBER'
+				sh 'kubectl apply -f deploy/sampleapp-deploy-k8.yml'
 			}
         }
 	    
