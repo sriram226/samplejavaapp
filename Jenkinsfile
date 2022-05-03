@@ -56,7 +56,7 @@ pipeline {
 			steps {
 				sh 'chmod 755 changetag.sh'
                                 sh './changetag.sh $BUILD_NUMBER'
-				sh 'kubectl apply -f deploy/sampleapp-deploy-k8s.yml'
+				sh 'kubectl apply -f deploy/sampleapp-deploy-k8.yml'
 			}
         }
 	    
